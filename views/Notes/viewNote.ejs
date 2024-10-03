@@ -1,0 +1,21 @@
+<%- include('../partials/_navigation.ejs') %> <%-
+include('../partials/_heading.ejs') %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="border border-primary p-4">
+        <!-- Use Bootstrap's text-center and text-break for heading and description -->
+        <h1 class="text-center"><%= noteview.heading %></h1>
+
+        <!-- Bootstrap text-justify utility doesn't exist anymore, but we can use text-break for word wrapping -->
+        <p class="mt-4 text-break"><%= noteview.description %></p>
+
+        <br />
+        <a class="d-block text-center" href="/">Click to go back</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/_Footer.ejs') %>

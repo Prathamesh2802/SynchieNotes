@@ -1,0 +1,70 @@
+<!--* Navigation -->
+
+<%- include('./partials/_navigation.ejs') %>
+
+<script defer>
+  let loginActiveNav = document.querySelector("#Nav_Home");
+  loginActiveNav.classList.add("active");
+</script>
+
+<!-- * Heading -->
+<%- include('./partials/_heading.ejs') %>
+<!-- * Data -->
+
+<!-- Embed server-side data into a <script> tag with type="application/json" -->
+<script id="json-data" type="application/json">
+  <%- JSON.stringify(SynchieNotesData).replace(/</g, '\\u003c').replace(/>/g, '\\u003e') %>
+</script>
+
+<!-- * Data -->
+<div class="container mt-5">
+  <%- include("./partials/_search.ejs") %>
+  <div class="row justify-content-center" id="grid"></div>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const jsonDataElement = document.getElementById("json-data");
+      const jsonData = jsonDataElement.textContent;
+      const search = document.querySelector("#search");
+      try {
+        const SynchieNotesData = JSON.parse(jsonData);
+
+        const gridNotes = document.querySelector("#grid");
+        if (SynchieNotesData && Array.isArray(SynchieNotesData)) {
+          const NotesData = SynchieNotesData.map((data) => {
+            return `<div class='col-12 col-md-6 col-lg-4 mb-4 note-card'>
+    <div class='border border-primary'>
+      <div class='d-flex justify-content-between px-4'>
+        <span style='display:none;' id=''>${data._id}</span>
+        <h1 class='text-center'>
+          <a href="/note/viewNote/${data._id}" class="text-decoration-none text-dark">${data.heading}</a>
+        </h1>
+        <div class="dropdown">
+          <button
+            class="btn btn-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          :
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/note/edit/${data._id}">Edit</a></li>
+            <li><a class="dropdown-item" href="/note/delete/${data._id}">Delete</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class='px-4 note-description'>${data.description}</p>
+    </div>
+  </div>`;
+          });
+
+          gridNotes.innerHTML = NotesData.join("");
+        }
+      } catch (error) {
+        console.error("JSON Parsing Error:", error);
+      }
+    });
+  </script>
+</div>
+
+<%- include('./partials/_Footer.ejs') %>

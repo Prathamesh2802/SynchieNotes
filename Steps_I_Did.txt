@@ -1,0 +1,12 @@
+1. I Installed the NPM Packages such as Express, Express-Session, Mongoose, Passport, Passport-local
+2. Then i created app.js in src folder then i imported those packages and also created a route which is pointed towards server/route/index.js
+3. Also in app.js, I defined use public page as static pages in which first i have added the style.css for css design
+4. Later I have then defined views where i have Implemented the Layouts for different Pages.
+5. In route page, I have created different apis for different operations such as login, registration, logout etc that api will be linked to their certain controllers
+6. I also defined partials to store Different pages sections such as 1. Import css/js 2. Navigation 3.Footer 4.Main Content
+7. Created Static registration and login page which is located in views
+8. on registration ejs page i have performed post request which will then redirect in route
+9. Also Created the controller page which contains all the processes login and registration or even redirect methods which is linked from route page.
+10. In the end created a js file in public/script to perform onclick function,
+which contains post request (installed axios for post request) that will redirect it in route page for post request operation
+or optionally you can just directly use post request in login ejs form the same way registration ejs did without the need of axios.

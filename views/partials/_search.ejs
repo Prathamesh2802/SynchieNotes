@@ -1,0 +1,32 @@
+<% if(loggedUser) { %>
+<div class="d-flex justify-content-center">
+  <div class="input-group rounded mb-5 w-50">
+    <input
+      type="search"
+      class="form-control rounded"
+      placeholder="Search"
+      aria-label="Search"
+      aria-describedby="search-addon"
+      id="search"
+    />
+
+    <!-- <span class="input-group-text border-0" id="search-addon">
+      <i class="fas fa-search"></i>
+    </span> -->
+  </div>
+</div>
+<% if(SynchieNotesData.length === 0) { %>
+<div class="d-flex justify-content-center">
+  <button class="btn btn-primary">
+    <a href="/NewNote" style="color: #fff">Create a Note</a>
+  </button>
+</div>
+
+<% } %> <% } else { %>
+<h4 class="text-center text-primary">Create your Note Now</h4>
+<div class="d-flex justify-content-center pt-2">
+  <button class="btn btn-primary">
+    <a href="/login" style="color: #fff">Get Started</a>
+  </button>
+</div>
+<% } %>

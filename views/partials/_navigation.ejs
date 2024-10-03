@@ -1,0 +1,63 @@
+<section class="nav_section">
+  <div class="container">
+    <nav class="navs">
+      <% if(loggedUser) { %>
+      <div class="nav_logo"></div>
+      <div class="nav-headings">
+        <li class="Nav_Home" id="Nav_Home">
+          <a href="/" class="navitems">Home</a>
+        </li>
+        <li class="Nav_NewNote" id="Nav_NewNote">
+          <a href="/NewNote" class="navitems">Create Note</a>
+        </li>
+        <li class="Nav_AboutUs" id="Nav_About">
+          <a href="/about" class="navitems">About</a>
+        </li>
+      </div>
+      <div class="dropdown profile_details">
+        <!-- <img src="" class="profilePic" /> -->
+        <button
+          class="btn btn-success dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <%= loggedUser.fullname %>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              id="profile"
+              href="/Profile"
+              class="navitems"
+              >Profile</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="/logout" class="navitems">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <% } else { %>
+      <div class="nav-headings">
+        <li class="Nav_Home" id="Nav_Home">
+          <a href="/" class="navitems">Home</a>
+        </li>
+        <li class="Nav_NewNote" id="Nav_NewNote">
+          <a href="/NewNote" class="navitems">Create Note</a>
+        </li>
+        <li class="Nav_Login" id="Nav_Login">
+          <a href="/login" class="navitems">Login</a>
+        </li>
+        <li class="Nav_Register" id="Nav_Register">
+          <a href="/Register" class="navitems">Register</a>
+        </li>
+        <li class="Nav_AboutUs" id="Nav_About">
+          <a href="/about" class="navitems">About</a>
+        </li>
+      </div>
+      <% } %>
+    </nav>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const synchieSubmit = document.querySelector("#synchie_submit");
+
+  if (synchieSubmit) {
+    synchieSubmit.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      try {
+        // Get the email and password values from the form
+        const email = document.querySelector("#synchie_email").value;
+        const password = document.querySelector("#synchie_password").value;
+
+        // Define the URL to which the request will be sent
+        const url = "/login";
+
+        // Create the data to send in the request body
+        const data = {
+          email: email,
+          password: password,
+        };
+
+        // Perform the POST request using fetch
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          // Login was successful
+          console.log(result.message);
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: result.message || "Login successful",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            window.location.href = "/";
+          });
+          // window.location.href = "/";
+        } else {
+          // Login failed
+          // toastr.error("Invalid Credentials");
+
+          Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: "Invalid credentials. Please try again.",
+          });
+
+          console.error("Login failed:");
+        }
+      } catch (error) {
+        console.error("Error during request:", error);
+      }
+    });
+  }
+});

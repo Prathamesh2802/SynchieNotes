@@ -1,0 +1,26 @@
+<!--* Navigation -->
+
+<%- include('./partials/_navigation.ejs') %>
+
+<script>
+  let AboutActive = document.querySelector("#Nav_About");
+  AboutActive.classList.add("active");
+</script>
+
+<!-- * Heading -->
+<%- include('./partials/_heading.ejs') %>
+<!-- * Data -->
+
+<div class="container mt-5 d-flex justify-content-center">
+  <h4 class="text-success w-50">
+    Welcome to Synchie Notes - your all-in-one platform for seamless note-taking
+    and collaboration. <br />
+    At Synchie Notes, we believe that ideas flow best when they're captured and
+    shared effortlessly. <br />
+    Whether you're a student, professional, or creative thinker, our intuitive
+    tools are designed to help you stay organized and access your notes anytime,
+    anywhere.
+  </h4>
+</div>
+
+<%- include('./partials/_Footer.ejs') %>

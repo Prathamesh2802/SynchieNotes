@@ -1,0 +1,41 @@
+<%- include('../partials/_navigation.ejs') %> <%-
+include('../partials/_heading.ejs') %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form
+        action="/note/edit/<%= noteview._id %>"
+        method="POST"
+        class="border border-primary p-4"
+      >
+        <div class="mb-3">
+          <label for="heading" class="form-label">Heading</label>
+          <input
+            type="text"
+            class="form-control"
+            id="heading"
+            name="heading"
+            value="<%= noteview.heading %>"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="5"
+            required
+          >
+<%= noteview.description %></textarea
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Update Note</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/_Footer.ejs') %>

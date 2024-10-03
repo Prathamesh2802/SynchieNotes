@@ -1,0 +1,41 @@
+<%- include('../partials/_navigation.ejs') %>
+
+<script>
+  let profilenav = document.querySelector("#profile");
+  profilenav.classList.add("active");
+</script>
+
+<div class="container">
+  <!-- * Heading -->
+  <%- include('../partials/_heading.ejs') %>
+
+  <div class="form-group">
+    <label for="synchie_FullName">Full Name</label>
+    <input
+      type="text"
+      class="form-control"
+      value="<%= loggedUser.fullname %>"
+      disabled
+    />
+  </div>
+  <div class="form-group mt-2">
+    <label for="synchie_username">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      value="<%= loggedUser.username %>"
+      disabled
+    />
+  </div>
+  <div class="form-group mt-2">
+    <label for="synchie_email">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      value="<%= loggedUser.email %>"
+      disabled
+    />
+  </div>
+</div>
+
+<%- include('../partials/_Footer.ejs') %>

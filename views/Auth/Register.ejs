@@ -1,0 +1,80 @@
+<!--* Navigation -->
+
+<%- include('../partials/_navigation.ejs') %>
+<script>
+  let loginActiveNav = document.querySelector("#Nav_Register");
+  loginActiveNav.classList.add("active");
+</script>
+
+<div class="container">
+  <!-- * Heading -->
+  <%- include('../partials/_heading.ejs') %>
+
+  <form class="mt-4" action="/Registering" method="post">
+    <div class="form-group" style="display: none">
+      <label for="synchie_honeypot">Honeypot Field</label>
+      <input
+        type="text"
+        id="synchie_honeypot"
+        name="honeypot"
+        placeholder="Enter test"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="synchie_FullName">Full Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="synchie_FullName"
+        name="fullname"
+        placeholder="Enter Full Name"
+        required
+      />
+    </div>
+    <div class="form-group mt-2">
+      <label for="synchie_username">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="synchie_username"
+        name="username"
+        placeholder="Enter Username"
+        required
+      />
+    </div>
+    <div class="form-group mt-2">
+      <label for="synchie_email">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="synchie_email"
+        placeholder="Enter email"
+        required
+      />
+      <small id="emailHelp" class="form-text text-muted mt-2"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+    <div class="form-group mt-2">
+      <label for="synchie_password">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        id="synchie_password"
+        placeholder="Password"
+        minlength="8"
+        required
+      />
+    </div>
+    <!-- <div class="form-group form-check mt-3">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div> -->
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>
+
+<%- include('../partials/_Footer.ejs') %>
