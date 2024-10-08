@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 
 import session from "express-session";
 
+import mongoSanitize from 'express-mongo-sanitize';
+
 // * Importing Passport for real auth
 import passport from "passport";
 
@@ -41,6 +43,11 @@ mongoose
   .catch((err) => {
     console.error("Error Connecting to DB: ", err);
   });
+
+  // Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+
 
 // * Session Use
 
