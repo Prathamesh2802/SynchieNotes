@@ -21,49 +21,59 @@
   <%- include("./partials/_search.ejs") %>
   <div class="row justify-content-center" id="grid"></div>
   <script defer>
-    document.addEventListener("DOMContentLoaded", () => {
-      const jsonDataElement = document.getElementById("json-data");
-      const jsonData = jsonDataElement.textContent;
-      const search = document.querySelector("#search");
-      try {
-        const SynchieNotesData = JSON.parse(jsonData);
+   document.addEventListener("DOMContentLoaded", () => {
+  const jsonDataElement = document.getElementById("json-data");
+  const jsonData = jsonDataElement.textContent;
+  const search = document.querySelector("#search");
+  try {
+    const SynchieNotesData = JSON.parse(jsonData);
+    const gridNotes = document.querySelector("#grid");
+    
+    function renderNotes(notes) {
+      const NotesData = notes.map((data) => {
+        return `<div class='col-12 col-md-6 col-lg-4 mb-4 note-card'>
+          <div class='border border-primary'>
+            <div class='d-flex justify-content-between px-4'>
+              <span style='display:none;' id=''>${data._id}</span>
+              <h1 class='text-center'>
+                <a href="/note/viewNote/${data._id}" class="text-decoration-none text-dark">${data.heading}</a>
+              </h1>
+              <div class="dropdown">
+                <button
+                  class="btn btn-light dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  :
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/note/edit/${data._id}">Edit</a></li>
+                  <li><a class="dropdown-item" href="/note/delete/${data._id}">Delete</a></li>
+                </ul>
+              </div>
+            </div>
+            <p class='px-4 note-description'>${data.description}</p>
+          </div>
+        </div>`;
+      });
+      gridNotes.innerHTML = NotesData.join("");
+    }
 
-        const gridNotes = document.querySelector("#grid");
-        if (SynchieNotesData && Array.isArray(SynchieNotesData)) {
-          const NotesData = SynchieNotesData.map((data) => {
-            return `<div class='col-12 col-md-6 col-lg-4 mb-4 note-card'>
-    <div class='border border-primary'>
-      <div class='d-flex justify-content-between px-4'>
-        <span style='display:none;' id=''>${data._id}</span>
-        <h1 class='text-center'>
-          <a href="/note/viewNote/${data._id}" class="text-decoration-none text-dark">${data.heading}</a>
-        </h1>
-        <div class="dropdown">
-          <button
-            class="btn btn-light dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-          :
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/note/edit/${data._id}">Edit</a></li>
-            <li><a class="dropdown-item" href="/note/delete/${data._id}">Delete</a></li>
-          </ul>
-        </div>
-      </div>
-      <p class='px-4 note-description'>${data.description}</p>
-    </div>
-  </div>`;
-          });
+    renderNotes(SynchieNotesData);
 
-          gridNotes.innerHTML = NotesData.join("");
-        }
-      } catch (error) {
-        console.error("JSON Parsing Error:", error);
-      }
+    search.addEventListener("input", (event) => {
+      const query = event.target.value.toLowerCase();
+      const filteredNotes = SynchieNotesData.filter(note =>
+        note.heading.toLowerCase().includes(query) ||
+        note.description.toLowerCase().includes(query)
+      );
+      renderNotes(filteredNotes);
     });
+  } catch (error) {
+    console.error("JSON Parsing Error:", error);
+  }
+});
+
   </script>
 </div>
 
