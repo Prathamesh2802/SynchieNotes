@@ -12,6 +12,10 @@ import session from "express-session";
 
 import mongoSanitize from 'express-mongo-sanitize';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
 // * Importing Passport for real auth
 import passport from "passport";
 
@@ -25,15 +29,26 @@ const app = express();
 
 const port = process.env.PORT || 7070;
 
+// app.use(urlencoded({ extended: true }));
+
+// app.use(express.json());
+
+// app.use(express.static("public"));
+
+// app.use(expressEjsLayouts);
+// app.set("layout", "./layout/main");
+// app.set("view engine", "ejs");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(urlencoded({ extended: true }));
-
 app.use(express.json());
-
-app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(expressEjsLayouts);
-app.set("layout", "./layout/main");
-app.set("view engine", "ejs");
+app.set('layout', './layout/main');
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'))
 
 // * DB Connection
 
