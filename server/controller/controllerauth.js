@@ -1,5 +1,5 @@
 import { user } from "../schema/user.js";
-import { hashpassword } from "../utils/helper.js";
+import { hashpassword,comparepassword } from "../utils/helper.js";
 
 const login = async (req, res) => {
   const locals = {
@@ -46,6 +46,32 @@ const PostRegistration = async (req, res) => {
 };
 
 export { PostRegistration };
+
+const UpdatePass = async (req, res) => {
+  const loggedUser = req.user;
+  if (!loggedUser) return res.redirect("/login");
+
+  const { currpass, newpassword } = req.body;
+
+  if (!comparepassword(currpass, loggedUser.password)) {
+    return res.status(404).send({ message: "Invalid credentials" });
+  }
+
+  if (currpass === newpassword) {
+    return res.status(401).send({ message: "New Password cannot be your current password" });
+  }
+
+  const hashedNewPass = hashpassword(newpassword);
+  // Assuming you save the new password to the user object here
+  loggedUser.password = hashedNewPass;
+
+  // Save the user with the new password
+  await loggedUser.save();
+
+  res.status(200).send({ message: "Password updated successfully" });
+};
+
+export { UpdatePass }
 
 const isLogging = (req, res) => {
   let success = "";

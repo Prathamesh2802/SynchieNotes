@@ -16,6 +16,7 @@ import {
   PostRegistration,
   register,
   isLogging,
+  UpdatePass,
   Profile,
   isloggingout,
 } from "../controller/controllerauth.js";
@@ -134,6 +135,8 @@ route.post("/login", rateLimitLogin, (req, res, next) => {
     });
   })(req, res, next);
 });
+
+route.post("/UpdatePass",UpdatePass)
 
 route.post("/NotesAdd", NotesCreated);
 
