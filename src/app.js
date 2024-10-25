@@ -67,6 +67,12 @@ app.use(passport.session());
 
 // * Routes
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send(err.message);
+});
+
+
 app.use("/", route);
 
 // * Invalid Link access error
