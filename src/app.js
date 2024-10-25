@@ -12,6 +12,8 @@ import session from "express-session";
 
 import mongoSanitize from 'express-mongo-sanitize';
 
+import MongoStore from "connect-mongo";
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -66,16 +68,30 @@ app.use(mongoSanitize());
 
 // * Session Use
 
-app.use(
-  session({
-    secret: process.env.SESSIONSECRETKEY,
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      maxAge: 60000 * 60,
-    },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSIONSECRETKEY,
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//       maxAge: 60000 * 60,
+//     },
+//   })
+// );
+
+app.use(session({
+  secret: process.env.SESSIONSECRETKEY,
+  saveUninitialized: false,
+  resave: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB,
+    ttl: 14 * 24 * 60 * 60
+  }),
+  cookie: {
+    maxAge: 60000 * 60,
+  }
+}));
+
 // * using Passport Js
 app.use(passport.initialize());
 app.use(passport.session());
